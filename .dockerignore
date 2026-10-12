@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+!.env.example
+.venv
+**/node_modules
+**/__pycache__
+data
+logs
+secrets
+output
+tmp
+
+
+agent/test_auth.json
+deliverables/

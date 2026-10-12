@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f7f3">
+  <title>Lenny · Growth Assistant</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/studio.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#prompt">Skip to message</a>
+  <div id="app" class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Conversation navigation">
+      <a href="/" class="brand"><span class="brand-mark">L<span>↗</span></span><span>lenny<span class="brand-dot">.</span><small>GROWTH ASSISTANT</small></span></a>
+      <button id="new-chat" class="new-chat"><span>＋</span> New conversation <kbd>↗</kbd></button>
+      <button id="library-button" class="nav-button"><span>▤</span> Transcript library <span class="count" id="library-count">—</span></button>
+      <button id="discover-button" class="nav-button">◇ Discover topics</button><button id="insights-button" class="nav-button">☆ Saved insights</button><button id="theme-button" class="nav-button" aria-pressed="false">◐ Dark mode</button><div class="nav-label">YOUR CONVERSATIONS</div>
+      <nav id="sessions" class="sessions" aria-label="Saved conversations"><p class="quiet">Your research starts here.</p></nav>
+      <div class="sidebar-bottom">
+        <div class="knowledge-card"><span class="tiny-spark">✳</span><strong>Ideas with a source.</strong><p>Expert perspectives.<br>Grounded in the conversation.</p><span id="index-status">Connecting to your library…</span></div>
+        <button id="settings-button" class="profile"><span class="avatar">Y</span><span>Your workspace<small>Personal · local deployment</small></span><span class="gear">⚙</span></button>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="breadcrumb"><button id="menu-toggle" class="icon-button mobile" aria-label="Toggle navigation">☰</button><span>Workspace</span><span class="slash">/</span><strong id="chat-title">New conversation</strong></div>
+        <div class="top-actions"><span class="connection"><i id="connection-dot"></i><span id="connection-label">Connecting</span></span><button class="icon-button" id="about-button" aria-label="About this assistant">?</button></div>
+      </header>
+      <div class="workspace" id="workspace">
+        <section class="chat-column" aria-label="Chat">
+          <div id="messages-scroll" class="messages-scroll">
+            <section id="welcome" class="welcome">
+              <div class="eyebrow"><span></span> LENNY / RESEARCH STUDIO</div>
+              <h1>A better question.<br><em>A clearer direction.</em></h1>
+              <p class="welcome-description">Product decisions start with good evidence. Explore the podcast library, follow the sources, and make your next move.</p>
+              <div class="welcome-proof"><span class="stack-dots"><i>LP</i><i>PM</i><i>↗</i></span><span><strong id="episode-count">Your podcast library</strong><br>Real conversations. Sources included.</span></div>
+              <div class="section-label">CHOOSE A STARTING POINT <span>↓</span></div>
+              <div class="suggestion-grid">
+                <button class="suggestion" data-prompt="How should a startup measure product-market fit?" data-mode="answer"><span class="card-icon orange">◎</span><strong>Find your product-market fit</strong><p>What signals tell you that you’re building something people need?</p><span class="card-link">Explore the evidence <b>↗</b></span></button>
+                <button class="suggestion" data-prompt="What advice do the guests give about improving user retention?" data-mode="answer"><span class="card-icon green">↗</span><strong>Build a habit that sticks</strong><p>Go beyond acquisition. Learn what keeps your users coming back.</p><span class="card-link">Unpack retention <b>↗</b></span></button>
+                <button class="suggestion" data-prompt="Write a Ship 30 for 30 essay about finding product-market fit." data-mode="essay"><span class="card-icon purple">✎</span><strong>Turn insight into an essay</strong><p>A clear point of view, a compelling hook, and a useful takeaway.</p><span class="card-link">Start writing <b>↗</b></span></button>
+                <button class="suggestion" data-prompt="Create an HTML growth experiment brief based on the guests' advice about user retention." data-mode="html"><span class="card-icon blue">▧</span><strong>Make something you can use</strong><p>Bring a research brief or growth plan to life, right beside your chat.</p><span class="card-link">Create an artifact <b>↗</b></span></button>
+              </div>
+            </section>
+            <div id="messages" class="messages" aria-live="polite"></div>
+            <div id="working" class="working hidden" role="status"><span class="pulse-mark">✳</span><div><strong id="working-label">Finding the right ideas…</strong><small>Generation and source review can take a few minutes. Your progress is saved.</small></div><button id="cancel-button" type="button" class="text-button" style="margin-left:auto; color:inherit;">Stop</button></div>
+          </div>
+          <div class="composer-wrap">
+            <div id="notice" class="notice hidden" role="alert"></div>
+            <form id="chat-form" class="composer">
+              <label class="sr-only" for="prompt">Your product or growth question</label>
+              <textarea id="prompt" placeholder="Ask a question. Name a challenge. Follow an idea." rows="2" maxlength="4000"></textarea>
+              <label id="audience-wrap" class="hidden">Essay audience <input id="audience" maxlength="160" placeholder="Product and growth teams" aria-label="Essay target audience"></label><div class="composer-bottom"><div class="composer-selects"><label class="mode-label"><span>✳</span><select id="mode" aria-label="Response format"><option value="auto">Auto</option><option value="answer">Ask a question</option><option value="essay">Write an essay</option><option value="markdown">Markdown document</option><option value="html">HTML artifact</option></select></label><span class="select-divider"></span><select id="provider" aria-label="AI provider"><option value="ollama">Local Ollama</option><option value="gemini">Gemini Cloud</option></select></div><button class="send" id="send" type="submit" aria-label="Send message">↑</button></div>
+            </form>
+            <div class="composer-foot"><span><i></i> Grounded in Lenny’s transcripts</span><span>Enter to send · Shift + Enter for a new line</span></div>
+          </div>
+        </section>
+        <aside class="artifact-panel hidden" id="artifact-panel" aria-label="Artifact viewer">
+          <header class="artifact-heading"><span class="artifact-symbol">▧</span><div><strong id="artifact-title">Your artifact</strong><small id="artifact-meta"></small></div><button id="close-artifact" class="icon-button" aria-label="Close artifact viewer">×</button></header>
+          <div class="artifact-toolbar"><div class="segmented"><button id="preview-tab" class="selected">Preview</button><button id="source-tab">Source</button></div><div><button id="copy-artifact" class="text-button">Copy</button><button id="download-artifact" class="text-button">Download ↓</button></div></div>
+          <div class="artifact-body" id="artifact-body"></div><footer class="artifact-footer"><span>◇</span> Isolated preview · scripts & external requests blocked</footer>
+        </aside>
+      </div>
+    </main>
+  </div>
+  <dialog id="modal"><div class="modal-header"><h2 id="modal-title"></h2><button id="close-modal" class="icon-button" aria-label="Close dialog">×</button></div><div id="modal-content"></div></dialog>
+  <div id="toast" role="status" class="toast hidden"></div>
+</body></html>
+
